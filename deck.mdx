@@ -1,145 +1,102 @@
 import {
+    Image,
+    Split
+} from "mdx-deck"
+
+import {
   CodeSurfer,
   CodeSurferColumns,
   Step,
 } from "code-surfer";
-import { github, vsDark } from "@code-surfer/themes";
+import { github, shadesOfPurple } from "@code-surfer/themes";
 
-export const theme = vsDark;
+export const theme = github;
 
-# Hello 👋
+<Image src="https://upload.wikimedia.org/wikipedia/commons/6/64/Lambda-letter-lowercase-symbol.svg" style={{ backgroundSize: 'contain', marginTop: 30 }} />
 
-You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
+## Functional  Programming
+
+---
+
+<Image src="https://upload.wikimedia.org/wikipedia/commons/6/64/Lambda-letter-lowercase-symbol.svg" style={{ backgroundSize: 'contain', marginTop: 30 }} />
+
+## FUNctional  Programming
+
+---
+
+### What is functional programming?
+
+---
+
+* declarative programming paradigm
+* uses expressions or declarations instead of statements
+* prefers immutable data
+* focuses on pure functions
+
+---
+
+### Pure Functions
+
+---
+
+* Alway returns the same value given the same arguments
+* Its evaluation has no side effects
 
 ---
 
 <CodeSurfer>
 
-```js title="This is a title" subtitle="and this a subtitle"
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
+```js 1:1
+function pure (input) {
+    // does some stuff
+    return output;
 }
 ```
 
-```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
-
-function adipiscing(...elit) {
-  if (!elit.sit) {
-    return [];
-  }
-
-  const sed = elit[0];
-  return eiusmod.tempor(sed) ? sed : [sed];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
+```js 2:2
+function pure (input) {
+    // does some stuff
+    return output;
 }
 ```
 
-```diff 1[10:14],2[15:19],3[22:27],10:12
-
+```js 3:3
+function pure (input) {
+    // does some stuff
+    return output;
+}
 ```
 
 </CodeSurfer>
 
 ---
 
-<CodeSurferColumns themes={[vsDark, github]}>
+<CodeSurferColumns themes={[shadesOfPurple, github]}>
 
 <Step>
 
-```js
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
+```js title="Splice is Impure" subtitle="Changes array in place"
+let numbers = [1, 2, 3, 4, 5];
+
+let firstThree = numbers.splice(0, 2);
+
+console.log(firstThree);
+// [1, 2, 3]
+
+console.log(numbers);
+// [4, 5]
 ```
 
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-```
+```js title="Slice is Pure" subtitle="Returns a new array"
+let numbers = [1, 2, 3, 4, 5];
 
-</Step>
+let firstThree = numbers.slice(0, 2);
 
-<Step>
+console.log(firstThree);
+// [1, 2, 3]
 
-```js
-const lorem = (ipsum, dolor, sit) => {
-  const amet = dolor - ipsum;
-  return consectetur.adipiscing(
-    {
-      elit: sed.eiusmod(sit - dolor) / amet + 2,
-    },
-    (tempor, incididunt) => ipsum + amet * incididunt
-  );
-};
-
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-
-const sed = (eiusmod, tempor, incididunt) => {
-  const ut = tempor - eiusmod;
-  return labore.et(
-    {
-      amet: dolore.magna(incididunt - tempor) / ut + 2,
-    },
-    (aliqua, elit) => eiusmod + ut * elit
-  );
-};
+console.log(numbers);
+// [1, 2, 3, 4, 5]
 ```
 
 </Step>
@@ -148,5 +105,394 @@ const sed = (eiusmod, tempor, incididunt) => {
 
 ---
 
-docs:  
-[codesurfer.pomb.us](https://codesurfer.pomb.us)
+<CodeSurfer>
+
+```js
+let otherStuff = "Hello";
+
+function greeter (name) {
+    return `${otherStuff} ${name}`;
+}
+
+greeter("Gabe");
+
+// "Hello Gabe"
+```
+
+```js
+let otherStuff = "Hello";
+
+function sideEffectCity (name) {
+    return `${otherStuff} ${name}`;
+}
+
+sideEffectCity("Gabe");
+
+// "Hello Gabe"
+```
+
+```js 1:1
+let otherStuff = "Hello";
+
+function sideEffectCity (name) {
+    return `${otherStuff} ${name}`;
+}
+
+sideEffectCity("Gabe");
+
+// "Hello Gabe"
+```
+
+```js 4:4
+let otherStuff = "Hello";
+
+function sideEffectCity (name) {
+    return `${otherStuff} ${name}`;
+}
+
+sideEffectCity("Gabe");
+
+// "Hello Gabe"
+```
+
+```js
+let otherStuff = "Hello";
+
+function sideEffectCity (name) {
+    return `${otherStuff} ${name}`;
+}
+
+otherStuff = "Go away,"
+
+sideEffectCity('Gabe');
+
+// "Go away, Gabe"
+```
+
+```js
+function pureGreeter(name){
+    return `Hello ${name}`;
+}
+
+pureGreeter("Gabe");
+
+// "Hello Gabe"
+```
+
+</CodeSurfer>
+
+---
+
+### First-Class Functions
+
+---
+
+<CodeSurfer>
+
+```js title="Anonymous Functions"
+function (number) {
+    if (number % 2 === 0){
+        return true;
+    }
+}
+```
+
+```js title="Assignable to Variable"
+const isEven = function (number) {
+    if (number % 2 === 0){
+        return true;
+    }
+}
+```
+
+```js title="Function as Return Value"
+const isEven = function (number) {
+    if (number % 2 === 0){
+        return true;
+    }
+}
+
+function makeAdder (x) {
+    return function (y) {
+      return x + y;
+    };
+}
+
+const addFive = makeAdder(5);
+```
+
+```js title="Functions as Parameters"
+const isEven = function (number) {
+    if (number % 2 === 0){
+        return true;
+    }
+}
+
+function makeAdder (x) {
+    return function (y) {
+      return x + y;
+    };
+}
+
+const addFive = makeAdder(5);
+
+const array = [1, 2, 3, 4, 5];
+
+const fiveMore = array.map(addFive);
+// [6, 7, 8, 9, 10]
+
+const evenStevens = fiveMore.filter(isEven);
+// [6, 8, 10]
+```
+
+</CodeSurfer>
+
+---
+
+### Higher Order Functions
+
+---
+
+<CodeSurfer>
+
+```js
+function map (fun, array){
+
+}
+```
+
+```js
+function map (fun, array){
+    let mappedArray = [];
+
+    return mappedArray;
+}
+```
+
+```js
+function map (fun, array){
+    let mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+
+    }
+
+    return mappedArray;
+}
+```
+
+```js 5:7
+function map (fun, array){
+    let mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        let mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+```js 1:11
+function map (fun, array){
+    let mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        let mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+```js
+function map (fun, array){
+    let mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        let mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+
+map(function(x){ return x * 2 }, [1, 2, 3, 4, 5]);
+
+// [2, 4, 6, 8, 10]
+```
+```js
+function map (fun, array){
+    const mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+```js 5:6
+function map (fun, array){
+    const mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+```js 4:8
+function map (fun, array){
+    const mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+```js 2:3
+function map (fun, array){
+    const mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+```js
+function map (fun, array){
+    const mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+
+map(function(x){ return x * 2 }, [1, 2, 3, 4, 5]);
+
+// [2, 4, 6, 8, 10]
+```
+
+```js 2:3
+function map (fun, array){
+    const mappedArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const mappedItem = fun(array[i]);
+
+        mappedArray.push(mappedItem);
+    }
+
+    return mappedArray;
+}
+```
+
+</CodeSurfer>
+
+---
+
+### Recursion
+
+---
+
+<CodeSurfer>
+
+```js
+function map (fun, array) {
+    const head = array[0];
+    const tail = array.slice(1, array.length);
+
+    if (head === undefined && tail.length < 1){
+        return [];
+    } else {
+        return [fun(head)].concat(map(fun, tail));
+    }
+}
+```
+
+```js 1:5
+function map (fun, array) {
+    // separate the head (first element) 
+    // from the tail (the rest of the array)
+    const head = array[0];
+    const tail = array.slice(1, array.length);
+
+    if (head === undefined && tail.length < 1){
+        return [];
+    } else {
+        return [fun(head)].concat(map(fun, tail));
+    }
+}
+```
+
+```js // 6:10
+function map (fun, array) {
+    // separate the head (first element) 
+    // from the tail (the rest of the array)
+    const head = array[0];
+    const tail = array.slice(1, array.length);
+
+    // the base case, or the halting condition
+    // stop when there aren't more elements to map
+    if (head === undefined && tail.length < 1){
+        return [];
+    } else {
+        return [fun(head)].concat(map(fun, tail));
+    }
+}
+```
+
+```js 11:20
+function map (fun, array) {
+    // separate the head (first element) 
+    // from the tail (the rest of the array)
+    const head = array[0];
+    const tail = array.slice(1, array.length);
+
+    // the base case, or the halting condition
+    // stop when there aren't more elements to map
+    if (head === undefined && tail.length < 1){
+        return [];
+    } else {
+        // call the and return function on the first element 
+        return [fun(head)]
+        // after we reconnect the head and tail, each time through
+            .concat(
+        // as we recursively call this function on itself
+                map(fun, tail)
+            );
+    }
+}
+```
+</CodeSurfer>
+
+---
+
+# Questions?
